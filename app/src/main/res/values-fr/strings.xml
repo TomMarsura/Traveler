@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TRAVELER</string>
+    <string name="username_text">Nom de compte</string>
+    <string name="password_text">Mot de passe</string>
+    <string name="login_button">Connexion</string>
+    <string name="register_button">Inscription</string>
+</resources>

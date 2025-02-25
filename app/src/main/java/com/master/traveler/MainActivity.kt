@@ -3,7 +3,7 @@ package com.master.traveler
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.master.traveler.databinding.ActivityMainBinding
 import okhttp3.OkHttpClient
@@ -12,6 +12,7 @@ import okhttp3.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,23 +29,24 @@ class MainActivity : AppCompatActivity() {
         val loginInput: EditText = findViewById(R.id.login_input)
         val passInput: EditText = findViewById(R.id.pass_input)
         val loginButton: Button = findViewById(R.id.login_button)
+        val responseText: TextView = findViewById(R.id.responseText)
 
         // Quand on clique sur le bouton, on lance la requête à l'API
         buttonHello.setOnClickListener {
-            callApi()
+            callApi(responseText)
         }
 
-        loginButton.setOnClickListener{
+        loginButton.setOnClickListener {
             val login = loginInput.text.toString()
             val pass = passInput.text.toString()
-            login(login, pass)
+            login(login, pass, responseText)
         }
     }
 
     // Fonction pour appeler l'API de connexion
-    private fun login(login: String, pass: String){
-        GlobalScope.launch(Dispatchers.IO){
-            try{
+    private fun login(login: String, pass: String, responseText: TextView) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
                 val client = OkHttpClient()
                 val request = Request.Builder()
                     .url("$url/login/$login/password/$pass")
@@ -52,55 +54,50 @@ class MainActivity : AppCompatActivity() {
 
                 val response: Response = client.newCall(request).execute()
 
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     val responseBody = response.body?.string()
-                    launch(Dispatchers.Main){
-                        Toast.makeText(this@MainActivity, "Réponse: $responseBody", Toast.LENGTH_SHORT).show()
+                    val message = responseBody?.let { JSONObject(it).optString("message", "Réponse vide") }
+                    launch(Dispatchers.Main) {
+                        responseText.text = message
                     }
                 } else {
-                    launch(Dispatchers.Main){
-                        Toast.makeText(this@MainActivity, "Erreur API: ${response.code}", Toast.LENGTH_SHORT).show()
+                    launch(Dispatchers.Main) {
+                        responseText.text = "Erreur API: ${response.code}"
                     }
                 }
             } catch (e: Exception) {
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@MainActivity, "Erreur: ${e.message}", Toast.LENGTH_SHORT)
-                        .show()
+                    responseText.text = "Erreur: ${e.message}"
                 }
             }
         }
     }
 
     // Fonction pour appeler l'API
-    private fun callApi() {
-        // Lancer la requête HTTP dans un thread de fond
+    private fun callApi(responseText: TextView) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val client = OkHttpClient()
                 val request = Request.Builder()
-                    .url("$url/")  // URL de ton API
+                    .url("$url/")
                     .build()
 
                 val response: Response = client.newCall(request).execute()
 
-                // Vérifie si la réponse est réussie
                 if (response.isSuccessful) {
                     val responseBody = response.body?.string()
-
-                    // Utiliser le thread principal pour afficher le résultat
+                    val message = responseBody?.let { JSONObject(it).optString("message", "Réponse vide") }
                     launch(Dispatchers.Main) {
-                        Toast.makeText(this@MainActivity, "Réponse: $responseBody", Toast.LENGTH_SHORT).show()
+                        responseText.text = message
                     }
                 } else {
-                    // Affiche une erreur si la requête a échoué
                     launch(Dispatchers.Main) {
-                        Toast.makeText(this@MainActivity, "Erreur API: ${response.code}", Toast.LENGTH_SHORT).show()
+                        responseText.text = "Erreur API: ${response.code}"
                     }
                 }
             } catch (e: Exception) {
-                // Gère les erreurs de réseau
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@MainActivity, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                    responseText.text = "Erreur: ${e.message}"
                 }
             }
         }

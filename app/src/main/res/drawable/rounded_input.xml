@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <!-- Effet de flou et de transparence -->
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/> <!-- Coins arrondis -->
+            <solid android:color="#CC636363"/> <!-- Blanc semi-transparent -->
+            <padding android:left="4dp" android:top="2dp" android:right="4dp" android:bottom="2dp"/> <!-- Marge intérieure -->
+        </shape>
+    </item>
+</layer-list>
