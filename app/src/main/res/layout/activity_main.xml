@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -13,19 +13,6 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/background_main"/>
-
-    <Button
-        android:id="@+id/button_hello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Hello"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
 
     <Button
         android:id="@+id/login_button"
@@ -38,7 +25,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773" />
+        app:layout_constraintVertical_bias="0.717" />
 
     <Button
         android:id="@+id/register_button"
@@ -51,68 +38,66 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintVertical_bias="0.787" />
 
-    <EditText
-        android:id="@+id/login_input"
+    <TextView
+        android:id="@+id/error_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/montserrat_regular"
-        android:inputType="textNoSuggestions"
-        android:background="@drawable/rounded_input"
-        android:textColor="@color/white"
-        style="@style/TextWithShadow"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        android:text="@string/error_login"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691" />
-
-    <EditText
-        android:id="@+id/pass_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/montserrat_regular"
-        android:inputType="textPassword"
-        android:background="@drawable/rounded_input"
-        android:textColor="@color/white"
-        style="@style/TextWithShadow"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_input"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintTop_toBottomOf="@+id/register_button"
+        app:layout_constraintVertical_bias="0.352" />
 
     <TextView
         android:id="@+id/username_text"
+        style="@style/TextWithShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
+        android:shadowColor="@color/black"
         android:text="@string/username_text"
         android:textColor="@color/white"
-        android:shadowColor="@color/black"
-        style="@style/TextWithShadow"
         app:layout_constraintBottom_toTopOf="@+id/login_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="@+id/login_input"
         app:layout_constraintTop_toBottomOf="@+id/app_name"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
+    <EditText
+        android:id="@+id/login_input"
+        style="@style/TextWithShadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_input"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_regular"
+        android:inputType="textNoSuggestions"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.647" />
+
     <TextView
         android:id="@+id/password_text"
+        style="@style/TextWithShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
+        android:shadowColor="@color/black"
         android:text="@string/password_text"
         android:textColor="@color/white"
-        android:shadowColor="@color/black"
-        style="@style/TextWithShadow"
         app:layout_constraintBottom_toTopOf="@+id/pass_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
@@ -121,20 +106,22 @@
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/responseText"
-        android:layout_width="338dp"
-        android:layout_height="50dp"
+    <EditText
+        android:id="@+id/pass_input"
+        style="@style/TextWithShadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_input"
+        android:ems="10"
         android:fontFamily="@font/montserrat_regular"
-        android:textAlignment="center"
+        android:inputType="textPassword"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button"
-        app:layout_constraintVertical_bias="0.841" />
+        app:layout_constraintTop_toBottomOf="@+id/login_input"
+        app:layout_constraintVertical_bias="0.512" />
 
     <TextView
         android:id="@+id/app_name"
@@ -142,28 +129,29 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_black"
         android:text="@string/app_name"
-        android:textSize="46sp"
         android:textColor="@color/white"
+        android:textSize="46sp"
         app:layout_constraintBottom_toTopOf="@+id/login_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.602" />
+        app:layout_constraintVertical_bias="0.371" />
 
     <TextView
         android:id="@+id/app_name2"
+        style="@style/TextWithShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_thin"
         android:text="PARTEZ, DÉCOUVREZ, RACONTEZ"
         android:textColor="@color/white"
         android:textSize="12sp"
-        style="@style/TextWithShadow"
         app:layout_constraintBottom_toTopOf="@+id/login_input"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.481" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

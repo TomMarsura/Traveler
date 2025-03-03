@@ -4,5 +4,6 @@
     <string name="password_text">Password</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
+    <string name="error_login">Incorrect login or password !</string>
     <!-- Strings used for fragments for navigation -->
 </resources>

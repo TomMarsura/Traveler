@@ -5,4 +5,5 @@
     <string name="password_text">Mot de passe</string>
     <string name="login_button">Connexion</string>
     <string name="register_button">Inscription</string>
+    <string name="error_login">Pseudo ou mot de passe incorrect !</string>
 </resources>
