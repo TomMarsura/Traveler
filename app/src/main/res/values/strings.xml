@@ -5,5 +5,7 @@
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
     <string name="error_login">Incorrect login or password !</string>
+    <string name="follow_button">Follow</string>
+    <string name="report_text">Report</string>
     <!-- Strings used for fragments for navigation -->
 </resources>

@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Traveler"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".ProfileOtherActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

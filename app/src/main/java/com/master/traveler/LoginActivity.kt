@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.master.traveler.databinding.ActivityMainBinding
 import okhttp3.OkHttpClient
@@ -51,24 +50,29 @@ class LoginActivity : AppCompatActivity() {
                     val jsonResponse = responseBody?.let { JSONObject(it) }
                     val code = jsonResponse?.optInt("code", 404)
 
-                    launch(Dispatchers.Main) {
-                        if (code == 200) {
-                            // Cacher le message d'erreur si le login est correct
-                            binding.errorLogin.visibility = View.INVISIBLE
+                    if (code == 200) {
+                        val userManager = UserManager(this@LoginActivity)
+                        val userJson = jsonResponse.getJSONObject("user")
+                        val user = User(
+                            login = userJson.getString("login"),
+                            username = userJson.getString("username"),
+                            bio = userJson.getString("bio"),
+                            profilePicture = userJson.getString("profilePicture"),
+                            nbFollowers = userJson.getInt("nbFollowers"),
+                            nbFollowing = userJson.getInt("nbFollowing")
+                        )
 
-                            // Rediriger vers HomeActivity
-                            val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        userManager.saveUser(user)
+
+                        launch(Dispatchers.Main) {
+                            val intent = Intent(this@LoginActivity, ProfileOtherActivity::class.java)
                             startActivity(intent)
-                            finish() // Ferme l'activité actuelle
-                        } else {
-                            // Afficher le message d'erreur si le login est incorrect
+                            finish()
+                        }
+                    } else {
+                        launch(Dispatchers.Main) {
                             binding.errorLogin.visibility = View.VISIBLE
                         }
-                    }
-                } else {
-                    launch(Dispatchers.Main) {
-                        binding.errorLogin.text = "Erreur API: ${response.code}"
-                        binding.errorLogin.visibility = View.VISIBLE
                     }
                 }
             } catch (e: Exception) {
@@ -79,4 +83,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
 }
