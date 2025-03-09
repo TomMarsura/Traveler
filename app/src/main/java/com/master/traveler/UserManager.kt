@@ -3,6 +3,7 @@ package com.master.traveler
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.master.traveler.data.User
 
 class UserManager(context: Context) {
     private val sharedPreferences: SharedPreferences =
