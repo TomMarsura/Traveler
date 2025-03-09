@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:elevation="4dp"
+    android:radius="8dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:gravity="center_vertical"> <!-- Centre le contenu verticalement -->
+
+        <!-- Image du post -->
+        <ImageView
+            android:id="@+id/postImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Première ligne : Nom et Prix -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"> <!-- Centre verticalement -->
+
+            <!-- Titre du post -->
+            <TextView
+                android:id="@+id/postName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"/>
+
+            <!-- Prix du post -->
+            <TextView
+                android:id="@+id/postPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Deuxième ligne : Nombre de jours -->
+        <TextView
+            android:id="@+id/postTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="10 jours"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+
+        <!-- Troisième ligne : Boutons (Like, Commentaires, Enregistrer) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center|start"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <!-- Bouton Like -->
+            <ImageButton
+                android:id="@+id/postLikeButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Like button"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_heart_outline" />
+
+            <!-- Nombre de likes -->
+            <TextView
+                android:id="@+id/postLikeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <!-- Bouton Commentaires -->
+            <ImageButton
+                android:id="@+id/postCommentButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Comment button"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_comment_bubble" />
+
+            <!-- Nombre de commentaires -->
+            <TextView
+                android:id="@+id/postCommentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <!-- Bouton Enregistrer (Signet) -->
+            <ImageButton
+                android:id="@+id/postBookmarkButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Bookmark button"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_bookmark_border" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

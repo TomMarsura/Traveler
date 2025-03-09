@@ -6,4 +6,6 @@
     <string name="login_button">Connexion</string>
     <string name="register_button">Inscription</string>
     <string name="error_login">Pseudo ou mot de passe incorrect !</string>
+    <string name="follow_button">Suivre</string>
+    <string name="report_text">Signal</string>
 </resources>

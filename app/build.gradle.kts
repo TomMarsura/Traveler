@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -48,7 +48,13 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.okhttp)
     implementation(libs.androidx.activity)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.kotlinx.coroutines.android)
+    implementation (libs.logging.interceptor)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 }
