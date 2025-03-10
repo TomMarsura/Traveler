@@ -8,5 +8,6 @@ data class User(
     val profilePicture: String,
     val nbFollowers: Int,
     val nbFollowing: Int,
-    val posts_liked: List<String>
+    val posts_liked: List<String>,
+    val posts_saved: List<String>
 )

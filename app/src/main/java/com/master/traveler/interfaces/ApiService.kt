@@ -1,6 +1,7 @@
 package com.master.traveler.interfaces
 
 import com.master.traveler.data.ApiResponse
+import com.master.traveler.data.Comment
 import com.master.traveler.data.Post
 import retrofit2.Response
 import retrofit2.http.Body
@@ -20,5 +21,23 @@ interface ApiService {
         @Path("postId") postId: String,
         @Path("userId") userId: String,
         @Path("isLiked") isLiked: Boolean
+    ): Response<ApiResponse>
+
+    @POST("posts/save/{postId}/{userId}/{isSaved}")
+    suspend fun savePost(
+        @Path("postId") postId: String,
+        @Path("userId") userId: String,
+        @Path("isSaved") isSaved: Boolean
+    ): Response<ApiResponse>
+
+    @GET("posts/get_comments/{postId}")
+    suspend fun getComments(
+        @Path("postId") postId: String
+    ): Response<ApiResponse>
+
+    @POST("posts/add_comment/{postId}")
+    suspend fun addComment(
+        @Path("postId") postId: String,
+        @Body comment: Comment
     ): Response<ApiResponse>
 }

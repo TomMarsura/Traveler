@@ -11,24 +11,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:gravity="center_vertical"> <!-- Centre le contenu verticalement -->
+        android:gravity="center_vertical">
 
-        <!-- Image du post -->
-        <ImageView
-            android:id="@+id/postImage"
+        <!-- Image du post avec infos utilisateur superposées -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp">
+
+            <!-- Image du post -->
+            <ImageView
+                android:id="@+id/postImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <!-- Infos utilisateur superposées en haut à gauche -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:gravity="center"
+                android:layout_margin="8dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_input"
+                android:padding="4dp"
+                android:elevation="2dp">
+
+                <!-- Image de l'utilisateur -->
+                <ImageView
+                    android:id="@+id/userProfileImage"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background"
+                    android:background="@drawable/ic_launcher_foreground"/>
+
+                <!-- Nom de l'utilisateur -->
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </LinearLayout>
+
+        </FrameLayout>
 
         <!-- Première ligne : Nom et Prix -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"> <!-- Centre verticalement -->
+            android:gravity="center_vertical">
 
-            <!-- Titre du post -->
             <TextView
                 android:id="@+id/postName"
                 android:layout_width="wrap_content"
@@ -37,7 +76,6 @@
                 android:textColor="@android:color/black"
                 android:layout_weight="1"/>
 
-            <!-- Prix du post -->
             <TextView
                 android:id="@+id/postPrice"
                 android:layout_width="wrap_content"
@@ -47,7 +85,6 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Deuxième ligne : Nombre de jours -->
         <TextView
             android:id="@+id/postTime"
             android:layout_width="wrap_content"
@@ -58,7 +95,6 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp" />
 
-        <!-- Troisième ligne : Boutons (Like, Commentaires, Enregistrer) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +103,6 @@
             android:orientation="horizontal"
             android:weightSum="3">
 
-            <!-- Bouton Like -->
             <ImageButton
                 android:id="@+id/postLikeButton"
                 android:layout_width="30dp"
@@ -77,7 +112,6 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_heart_outline" />
 
-            <!-- Nombre de likes -->
             <TextView
                 android:id="@+id/postLikeCount"
                 android:layout_width="wrap_content"
@@ -87,7 +121,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
-            <!-- Bouton Commentaires -->
             <ImageButton
                 android:id="@+id/postCommentButton"
                 android:layout_width="30dp"
@@ -98,7 +131,6 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_comment_bubble" />
 
-            <!-- Nombre de commentaires -->
             <TextView
                 android:id="@+id/postCommentCount"
                 android:layout_width="wrap_content"
@@ -108,7 +140,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
-            <!-- Bouton Enregistrer (Signet) -->
             <ImageButton
                 android:id="@+id/postBookmarkButton"
                 android:layout_width="30dp"
