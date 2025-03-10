@@ -66,8 +66,13 @@ class LoginActivity : AppCompatActivity() {
                             postsLikedList.add(postsLikedJsonArray.getString(i))
                         }
 
-                        // affichage de la liste des posts likés
-                        println(postsLikedList)
+                        // Récupérer la liste "posts_saved" depuis le JSON
+                        val postsSavedJsonArray = userJson.getJSONArray("posts_saved")
+
+                        val postsSavedList = mutableListOf<String>()
+                        for (i in 0 until postsSavedJsonArray.length()) {
+                            postsSavedList.add(postsSavedJsonArray.getString(i))
+                        }
 
                         // Créer l'objet User avec toutes les données
                         val user = User(
@@ -78,7 +83,8 @@ class LoginActivity : AppCompatActivity() {
                             profilePicture = userJson.getString("profilePicture"),
                             nbFollowers = userJson.getInt("nbFollowers"),
                             nbFollowing = userJson.getInt("nbFollowing"),
-                            posts_liked = postsLikedList
+                            posts_liked = postsLikedList,
+                            posts_saved = postsSavedList
                         )
 
                         userManager.saveUser(user)
@@ -97,6 +103,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
+                e.printStackTrace() // Affiche l'exception complète dans Logcat
                 launch(Dispatchers.Main) {
                     binding.errorLogin.text = "Erreur: ${e.message}"
                     binding.errorLogin.visibility = View.VISIBLE
@@ -155,7 +162,7 @@ class LoginActivity : AppCompatActivity() {
                 text_color = "#FFFFFF"
             ),
             nb_comments = 1,
-            comments = listOf(Comment(userId, "C'était top, les paysages sont beaux, la mer est belle, la météo est cool, allez au pérou")),
+            comments = listOf(Comment(userId, "tom", "C'était top, les paysages sont beaux, la mer est belle, la météo est cool, allez au pérou")),
             likes = 1600
         )
 

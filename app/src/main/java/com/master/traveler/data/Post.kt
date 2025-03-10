@@ -3,7 +3,9 @@ package com.master.traveler.data
 data class ApiResponse(
     val code: Int,
     val posts: List<PostHome>,
-    val nb_likes: Int
+    val nb_likes: Int,
+    val comments: List<Comment>,
+    val nb_comments: Int
 )
 
 data class PostHome(
@@ -86,5 +88,6 @@ data class Presentation(
 
 data class Comment(
     val user_id: String,
+    val login: String,
     val comment: String
 )

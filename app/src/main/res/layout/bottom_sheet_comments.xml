@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/commentsContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Titre -->
+    <TextView
+        android:id="@+id/commentsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Commentaires"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"/>
+
+    <!-- Liste des commentaires -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+    <!-- Champ pour ajouter un commentaire -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/commentEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Ajouter un commentaire..."
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton
+            android:id="@+id/sendCommentButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Like button"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_send"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</LinearLayout>
