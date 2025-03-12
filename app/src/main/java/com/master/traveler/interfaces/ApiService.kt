@@ -40,4 +40,11 @@ interface ApiService {
         @Path("postId") postId: String,
         @Body comment: Comment
     ): Response<ApiResponse>
+
+    @POST("register/{login}/{password}/{username}")
+    suspend fun registerUser(
+        @Path("login") login: String,
+        @Path("password") password: String,
+        @Path("username") username: String
+    ): Response<ApiResponse>
 }

@@ -8,4 +8,7 @@
     <string name="error_login">Pseudo ou mot de passe incorrect !</string>
     <string name="follow_button">Suivre</string>
     <string name="report_text">Signal</string>
+    <string name="login_text">Identifiant</string>
+    <string name="error_register">Veuillez remplir tous les champs et \nvérifiez que votre mot de passe fait \nau moins 6 caractères.</string>
+
 </resources>

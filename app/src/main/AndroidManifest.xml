@@ -33,6 +33,10 @@
             android:exported="true"
             android:theme="@style/Theme.Traveler">
         </activity>
+        <activity android:name=".RegisterActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Traveler">
+        </activity>
     </application>
 
 </manifest>
