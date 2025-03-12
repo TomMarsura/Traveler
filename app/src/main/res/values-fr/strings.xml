@@ -13,4 +13,5 @@
     <string name="report_posts">Posts incorrects</string>
     <string name="login_text">Identifiant</string>
     <string name="following_button">Suivi</string>
+    <string name="error_register">Veuillez remplir tous les champs et \nvérifiez que votre mot de passe fait \nau moins 6 caractères.</string>
 </resources>
