@@ -5,7 +5,8 @@ data class ApiResponse(
     val posts: List<PostHome>,
     val nb_likes: Int,
     val comments: List<Comment>,
-    val nb_comments: Int
+    val nb_comments: Int,
+    val user: User
 )
 
 data class PostHome(
@@ -15,7 +16,8 @@ data class PostHome(
     val total_price: Int,
     val nb_comments: Int,
     val presentation: Presentation,
-    val likes: Int
+    val likes: Int,
+    val user_name: String
 )
 
 data class Post(
@@ -28,7 +30,8 @@ data class Post(
     val presentation: Presentation,
     val nb_comments: Int,
     val comments: List<Comment>,
-    val likes: Int
+    val likes: Int,
+    val user_name: String
 )
 
 data class TravelInfos(

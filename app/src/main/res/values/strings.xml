@@ -7,8 +7,10 @@
     <string name="error_login">Incorrect login or password !</string>
     <string name="follow_button">Follow</string>
     <string name="report_text">Report</string>
+    <string name="report_abuse">Abusive Language</string>
+    <string name="report_identity">Identity Theft</string>
+    <string name="report_posts">Incorrect posts</string>
     <string name="login_text">Login</string>
     <string name="error_register">Please fill in all fields and ensure the \npassword is at least 6 characters long.</string>
-
     <!-- Strings used for fragments for navigation -->
 </resources>

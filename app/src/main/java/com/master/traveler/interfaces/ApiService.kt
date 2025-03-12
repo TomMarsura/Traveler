@@ -41,6 +41,15 @@ interface ApiService {
         @Body comment: Comment
     ): Response<ApiResponse>
 
+    @GET("posts/get_from_user/{userId}")
+    suspend fun getPostsFromUser(
+        @Path("userId") userId: String
+    ): Response<ApiResponse>
+
+    @GET("users/get_infos/{userId}")
+    suspend fun getUserInfos(
+        @Path("userId") userId: String
+      
     @POST("register/{login}/{password}/{username}")
     suspend fun registerUser(
         @Path("login") login: String,

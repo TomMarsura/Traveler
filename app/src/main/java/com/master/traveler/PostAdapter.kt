@@ -33,11 +33,14 @@ class PostAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
 
+        println("Entrée POSTS")
+        println("Post ID: ${post.id}")
+
         // Assigner les données du post à la vue
         holder.postName.text = post.name
         holder.postPrice.text = "€ ${post.total_price}"
         holder.postTime.text = "${post.presentation.total_time} jours"
-        holder.userName.text = user.login
+        holder.userName.text = post.user_name
 
         // Charger l'image avec Glide
         Glide.with(holder.itemView.context)
@@ -74,7 +77,7 @@ class PostAdapter(
             // Inverser l'état du like et mettre à jour la liste des posts likés
             isLiked = !isLiked
             // Appeler la fonction onLikeClicked pour mettre à jour l'interface utilisateur et les données de l'utilisateur
-            onLikeClicked(holder, post.id, isLiked)
+            onLikeClicked(holder, post.id, isLiked, UserManager(holder.itemView.context))
 
             // Mettre à jour l'UI en fonction de l'état du bouton
         }
@@ -132,7 +135,7 @@ class PostAdapter(
         }
     }
 
-    fun onLikeClicked(holder: PostViewHolder, postId: String, isLiked: Boolean) {
+    fun onLikeClicked(holder: PostViewHolder, postId: String, isLiked: Boolean, userManager: UserManager) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val response: Response<ApiResponse> = RetrofitInstance.api.likePost(postId, user.id, isLiked)
@@ -140,8 +143,10 @@ class PostAdapter(
                 if (response.isSuccessful) {
                     if (isLiked) {
                         holder.postLikeButton.setImageResource(R.drawable.ic_heart_filled)
+                        userManager.toggleLikePost(postId)
                     } else {
                         holder.postLikeButton.setImageResource(R.drawable.ic_heart_outline)
+                        userManager.toggleLikePost(postId)
                     }
 
                     // Mettre à jour le nombre de likes

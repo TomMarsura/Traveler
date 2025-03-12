@@ -24,4 +24,18 @@ class UserManager(context: Context) {
     fun clearUser() {
         sharedPreferences.edit().remove("user_data").apply()
     }
+
+    fun toggleLikePost(postId: String) {
+        val user = getUser()
+        if (user != null) {
+            val updatedPostsLiked = if (user.posts_liked.contains(postId)) {
+                user.posts_liked - postId
+            } else {
+                user.posts_liked + postId
+            }
+
+            val updatedUser = user.copy(posts_liked = updatedPostsLiked)
+            saveUser(updatedUser)
+        }
+    }
 }
