@@ -49,5 +49,11 @@ interface ApiService {
     @GET("users/get_infos/{userId}")
     suspend fun getUserInfos(
         @Path("userId") userId: String
+      
+    @POST("register/{login}/{password}/{username}")
+    suspend fun registerUser(
+        @Path("login") login: String,
+        @Path("password") password: String,
+        @Path("username") username: String
     ): Response<ApiResponse>
 }

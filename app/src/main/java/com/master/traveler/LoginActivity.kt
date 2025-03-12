@@ -29,11 +29,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val loginButton: Button = binding.loginButton
-
+        val registerButton: Button = binding.registerButton
         loginButton.setOnClickListener {
             val login = binding.loginInput.text.toString()
             val pass = binding.passInput.text.toString()
             login(login, pass)
+        }
+        registerButton.setOnClickListener{
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
