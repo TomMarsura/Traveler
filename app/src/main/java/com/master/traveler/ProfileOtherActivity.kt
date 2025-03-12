@@ -3,27 +3,30 @@ package com.master.traveler
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.master.traveler.config.RetrofitInstance
+import com.master.traveler.data.ApiResponse
 import com.master.traveler.data.PostHome
 import com.master.traveler.data.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class ProfileOtherActivity : AppCompatActivity() {
 
     private lateinit var userManager: UserManager
-    private var user: User? = null  // Ajout du champ user pour le garder en référence
+    private var user: User? = null
     private var currentUser: User? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,32 +34,65 @@ class ProfileOtherActivity : AppCompatActivity() {
 
         val user_id = intent.getStringExtra("USER_ID")
 
-        // Références aux Views
-        val userLogin: TextView = findViewById(R.id.userUsername)
-        val userBio: TextView = findViewById(R.id.userBio)
-        val userPicture: ImageView = findViewById(R.id.profilePicture)
+        val followButton: Button = findViewById(R.id.followButton)
 
         userManager = UserManager(this)
-
         currentUser = userManager.getUser()
 
-        // Chargement de l'image avec Glide
         if (user_id != null) {
             fetchUserData(user_id)
         }
 
-        // Bouton pour retourner à HomeActivity
         findViewById<ImageView>(R.id.homeButton).setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
 
-        val reportButton: ImageView = findViewById(R.id.reportImage)
-
-        // Gérer le clic sur le bouton "Signaler"
-        reportButton.setOnClickListener {
+        findViewById<ImageView>(R.id.reportImage).setOnClickListener {
             showReportMenu(it)
+        }
+
+        var isFollowing = currentUser?.following?.contains(user_id) == true
+
+        updateFollowButton(followButton, isFollowing)
+
+        followButton.setOnClickListener {
+            isFollowing = !isFollowing
+            toggleFollowUser(user_id, isFollowing, followButton)
+        }
+    }
+
+    private fun toggleFollowUser(userId: String?, isFollowing: Boolean, button: Button) {
+        userId?.let {
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val response: Response<ApiResponse> = RetrofitInstance.api.followUser(currentUser!!.id, it, isFollowing)
+                    if (response.isSuccessful) {
+                        userManager.toggleFollowUser(it)
+                        launch(Dispatchers.Main) {
+                            updateFollowButton(button, isFollowing)
+                        }
+                    } else {
+                        launch(Dispatchers.Main) {
+                            Toast.makeText(this@ProfileOtherActivity, "Erreur lors de la mise à jour du suivi", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } catch (e: Exception) {
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(this@ProfileOtherActivity, "Erreur réseau: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateFollowButton(button: Button, isFollowing: Boolean) {
+        if (isFollowing) {
+            button.text = getString(R.string.following_button)
+            button.setBackgroundColor("#636363".toColorInt())
+        } else {
+            button.text = getString(R.string.follow_button)
+            button.setBackgroundColor("#2881FF".toColorInt())
         }
     }
 
@@ -120,26 +156,6 @@ class ProfileOtherActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun updateUI(user: User) {
-        val userLogin: TextView = findViewById(R.id.userUsername)
-        val userBio: TextView = findViewById(R.id.userBio)
-        val userPicture: ImageView = findViewById(R.id.profilePicture)
-
-        println("User: ")
-        println(user)
-
-        userLogin.text = user.username
-        userBio.text = user.bio
-
-        Glide.with(this)
-            .load(user.profilePicture)
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .error(R.drawable.ic_launcher_background)
-            .circleCrop()
-            .into(userPicture)
-    }
-
     private fun showUserPosts(posts: List<PostHome>?) {
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewPosts)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -152,12 +168,22 @@ class ProfileOtherActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateUI(user: User) {
+        findViewById<TextView>(R.id.userUsername).text = user.username
+        findViewById<TextView>(R.id.userBio).text = user.bio
+
+        Glide.with(this)
+            .load(user.profilePicture)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .error(R.drawable.ic_launcher_background)
+            .circleCrop()
+            .into(findViewById(R.id.profilePicture))
+    }
 
     private fun showReportMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
         popupMenu.menuInflater.inflate(R.menu.menu_report, popupMenu.menu)
 
-        // Gérer les clics sur les éléments du menu
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.report_abuse -> {
