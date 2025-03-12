@@ -8,4 +8,8 @@
     <string name="error_login">Pseudo ou mot de passe incorrect !</string>
     <string name="follow_button">Suivre</string>
     <string name="report_text">Signal</string>
+    <string name="report_abuse">Propos injurieux</string>
+    <string name="report_identity">Usurpation d\'identité</string>
+    <string name="report_posts">Posts incorrects</string>
+    <string name="login_text">Identifiant</string>
 </resources>

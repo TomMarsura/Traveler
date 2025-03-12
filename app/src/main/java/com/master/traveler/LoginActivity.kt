@@ -74,6 +74,20 @@ class LoginActivity : AppCompatActivity() {
                             postsSavedList.add(postsSavedJsonArray.getString(i))
                         }
 
+                        val followersJsonArray = userJson.getJSONArray("followers")
+
+                        val followersList = mutableListOf<String>()
+                        for (i in 0 until followersJsonArray.length()) {
+                            followersList.add(followersJsonArray.getString(i))
+                        }
+
+                        val followingJsonArray = userJson.getJSONArray("following")
+
+                        val followingList = mutableListOf<String>()
+                        for (i in 0 until followingJsonArray.length()) {
+                            followingList.add(followingJsonArray.getString(i))
+                        }
+
                         // Créer l'objet User avec toutes les données
                         val user = User(
                             id = userJson.getString("id"),
@@ -84,7 +98,10 @@ class LoginActivity : AppCompatActivity() {
                             nbFollowers = userJson.getInt("nbFollowers"),
                             nbFollowing = userJson.getInt("nbFollowing"),
                             posts_liked = postsLikedList,
-                            posts_saved = postsSavedList
+                            posts_saved = postsSavedList,
+                            followers = followersList,
+                            following = followingList,
+                            travels = userJson.getInt("travels")
                         )
 
                         userManager.saveUser(user)
@@ -162,8 +179,15 @@ class LoginActivity : AppCompatActivity() {
                 text_color = "#FFFFFF"
             ),
             nb_comments = 1,
-            comments = listOf(Comment(userId, "tom", "C'était top, les paysages sont beaux, la mer est belle, la météo est cool, allez au pérou")),
-            likes = 1600
+            comments = listOf(
+                Comment(
+                    userId,
+                    "tom",
+                    "C'était top, les paysages sont beaux, la mer est belle, la météo est cool, allez au pérou"
+                )
+            ),
+            likes = 1600,
+            user_name = "Tom"
         )
 
         // Appel réseau pour ajouter le post

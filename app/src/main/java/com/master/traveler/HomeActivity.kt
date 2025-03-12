@@ -3,9 +3,12 @@ package com.master.traveler
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.master.traveler.data.ApiResponse
@@ -36,6 +39,40 @@ class HomeActivity : AppCompatActivity() {
             return
         }
 
+        val profileImageView = findViewById<ImageView>(R.id.profileIcon)
+
+        // Charger l'image de profil avec Glide
+        user.profilePicture?.let { profileUrl ->
+            Glide.with(this)
+                .load(profileUrl)
+                .placeholder(R.drawable.ic_launcher_background) // Image par défaut en attendant le chargement
+                .error(R.drawable.ic_launcher_foreground)             // Image en cas d'erreur
+                .circleCrop()                                   // Pour afficher l'image en cercle
+                .into(profileImageView)
+        }
+
+        // Bouton Maison : Remonte et recharge la page
+        findViewById<ImageView>(R.id.buttonHome).setOnClickListener {
+            recyclerView.scrollToPosition(0)
+            fetchPostsFromApi() // Recharge les posts
+        }
+
+        // Filtrer par "Fil d'actualité"
+        findViewById<TextView>(R.id.textFeed).setOnClickListener {
+            fetchPostsFromApi() // Afficher les posts généraux
+        }
+
+        // Filtrer par "Suivis"
+        findViewById<TextView>(R.id.textFollowing).setOnClickListener {
+            // fetchFollowedPosts() // À décommenter lorsque cette fonction est prête
+        }
+
+        // Icône de Profil : Aller à l'activité Profil
+        profileImageView.setOnClickListener {
+            val intent = Intent(this, ProfileOtherActivity::class.java)
+            intent.putExtra("USER_ID", user.id)
+            startActivity(intent)
+        }
 
         // Initialiser le RecyclerView
         recyclerView = findViewById(R.id.recyclerViewPosts)
