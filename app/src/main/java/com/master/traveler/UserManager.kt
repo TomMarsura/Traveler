@@ -38,4 +38,28 @@ class UserManager(context: Context) {
             saveUser(updatedUser)
         }
     }
+
+    fun toggleFollowUser(userId: String) {
+        val user = getUser()
+        if (user != null) {
+            val isFollowing = user.following.contains(userId)
+
+            val updatedFollowing = if (isFollowing) {
+                user.following - userId
+            } else {
+                user.following + userId
+            }
+
+            val updatedNbFollowing = if (isFollowing) user.nbFollowing - 1 else user.nbFollowing + 1
+            val updatedNbFollowers = if (isFollowing) user.nbFollowers - 1 else user.nbFollowers + 1
+
+            val updatedUser = user.copy(
+                following = updatedFollowing,
+                nbFollowing = updatedNbFollowing,
+                nbFollowers = updatedNbFollowers
+            )
+
+            saveUser(updatedUser)
+        }
+    }
 }

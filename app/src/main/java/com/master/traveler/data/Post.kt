@@ -6,7 +6,8 @@ data class ApiResponse(
     val nb_likes: Int,
     val comments: List<Comment>,
     val nb_comments: Int,
-    val user: User
+    val user: User,
+    val profilePicture: String
 )
 
 data class PostHome(

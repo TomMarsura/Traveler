@@ -12,4 +12,5 @@
     <string name="report_identity">Usurpation d\'identité</string>
     <string name="report_posts">Posts incorrects</string>
     <string name="login_text">Identifiant</string>
+    <string name="following_button">Suivi</string>
 </resources>

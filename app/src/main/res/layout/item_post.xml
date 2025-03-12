@@ -28,6 +28,8 @@
 
             <!-- Infos utilisateur superposées en haut à gauche -->
             <LinearLayout
+                android:id="@+id/userInfo"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|start"

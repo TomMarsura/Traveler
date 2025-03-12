@@ -1,10 +1,12 @@
 package com.master.traveler
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +44,8 @@ class PostAdapter(
         holder.postTime.text = "${post.presentation.total_time} jours"
         holder.userName.text = post.user_name
 
+        val userProfilePicture = getProfilePicture(post.user_id, holder.userProfileImage)
+
         // Charger l'image avec Glide
         Glide.with(holder.itemView.context)
             .load(post.presentation.image)
@@ -49,17 +53,15 @@ class PostAdapter(
             .error(R.drawable.ic_launcher_background)
             .into(holder.postImage)
 
-        // Charger l'image de userProfileImage
-        Glide.with(holder.itemView.context)
-            .load(user.profilePicture)
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
-            .circleCrop()
-            .into(holder.userProfileImage)
-
         // Afficher les likes et les commentaires
         holder.postLikeCount.text = post.likes.toString()
         holder.postCommentCount.text = post.nb_comments.toString()
+
+        holder.userInfoLayout.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ProfileOtherActivity::class.java)
+            intent.putExtra("USER_ID", post.user_id)
+            holder.itemView.context.startActivity(intent)
+        }
 
         // Vérifier si ce post est liké par l'utilisateur
         var isLiked = user.posts_liked.contains(post.id)
@@ -113,6 +115,39 @@ class PostAdapter(
         val postCommentButton: ImageButton = itemView.findViewById(R.id.postCommentButton)
         val postCommentCount: TextView = itemView.findViewById(R.id.postCommentCount)
         val postBookmarkButton: ImageButton = itemView.findViewById(R.id.postBookmarkButton)
+
+        // Nouveau LinearLayout
+        val userInfoLayout: LinearLayout = itemView.findViewById(R.id.userInfo)
+    }
+
+    private fun getProfilePicture(userId: String, imageView: ImageView) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val response: Response<ApiResponse> = RetrofitInstance.api.getProfilePicture(userId)
+                if (response.isSuccessful && response.body()?.code == 200) {
+                    val profilePictureUrl = response.body()?.profilePicture
+                    println("URL de la photo de profil: $profilePictureUrl")
+                    launch(Dispatchers.Main) {
+                        Glide.with(imageView.context)
+                            .load(profilePictureUrl)
+                            .placeholder(R.drawable.ic_launcher_background)
+                            .error(R.drawable.ic_launcher_background)
+                            .circleCrop()
+                            .into(imageView)
+                    }
+                } else {
+                    // Image par défaut en cas d'erreur
+                    launch(Dispatchers.Main) {
+                        imageView.setImageResource(R.drawable.ic_launcher_background)
+                    }
+                }
+            } catch (e: Exception) {
+                println("Erreur lors du chargement de la photo de profil: ${e.message}")
+                launch(Dispatchers.Main) {
+                    imageView.setImageResource(R.drawable.ic_launcher_background)
+                }
+            }
+        }
     }
 
     fun onSaveClicked(holder: PostViewHolder, postId: String, isSaved: Boolean) {

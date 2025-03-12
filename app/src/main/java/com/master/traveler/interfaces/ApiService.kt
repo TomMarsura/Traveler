@@ -50,4 +50,16 @@ interface ApiService {
     suspend fun getUserInfos(
         @Path("userId") userId: String
     ): Response<ApiResponse>
+
+    @POST("users/follow/{currentUserId}/{otherUserId}/{isFollowed}")
+    suspend fun followUser(
+        @Path("currentUserId") currentUserId: String,
+        @Path("otherUserId") otherUserId: String,
+        @Path("isFollowed") isFollowed: Boolean
+    ): Response<ApiResponse>
+
+    @GET("users/get_profile_picture/{userId}")
+    suspend fun getProfilePicture(
+        @Path("userId") userId: String
+    ): Response<ApiResponse>
 }

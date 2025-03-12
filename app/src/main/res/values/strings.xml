@@ -11,5 +11,6 @@
     <string name="report_identity">Identity Theft</string>
     <string name="report_posts">Incorrect posts</string>
     <string name="login_text">Login</string>
+    <string name="following_button">Following</string>
     <!-- Strings used for fragments for navigation -->
 </resources>

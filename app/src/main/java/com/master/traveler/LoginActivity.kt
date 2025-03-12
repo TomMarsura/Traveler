@@ -167,27 +167,21 @@ class LoginActivity : AppCompatActivity() {
         // Création de l'objet Post
         val post = Post(
             id = postId,
-            user_id = userId,
-            name = "Pérou",
+            user_id = "4dbe922b-0d19-46f7-872f-84441b8934c8",
+            name = "Salty Springs",
             post_date = "2025-01-20",
             travel_infos = travelInfos,  // Utilise l'objet TravelInfos ici
-            total_price = 970,
+            total_price = 80,
             presentation = Presentation(
-                image = "https://www.terresdesandes.org/images/destinations/machu.jpg",
+                image = "https://i.redd.it/6mszgs0yi0c91.png",
                 total_time = 14,
                 card_color = "#A67D56",
                 text_color = "#FFFFFF"
             ),
-            nb_comments = 1,
-            comments = listOf(
-                Comment(
-                    userId,
-                    "tom",
-                    "C'était top, les paysages sont beaux, la mer est belle, la météo est cool, allez au pérou"
-                )
-            ),
-            likes = 1600,
-            user_name = "Tom"
+            nb_comments = 0,
+            comments = emptyList(),
+            likes = 2847,
+            user_name = "marou"
         )
 
         // Appel réseau pour ajouter le post
