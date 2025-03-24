@@ -2,18 +2,24 @@ package com.master.traveler
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings.Global
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.master.traveler.config.RetrofitInstance
 import com.master.traveler.data.ApiResponse
 import com.master.traveler.data.PostHome
 import com.master.traveler.data.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
 
@@ -57,14 +63,21 @@ class HomeActivity : AppCompatActivity() {
             fetchPostsFromApi() // Recharge les posts
         }
 
+        val textFeedButton: TextView = findViewById(R.id.textFeed)
+        val textFollowedButton: TextView = findViewById(R.id.textFollowing)
+
         // Filtrer par "Fil d'actualité"
-        findViewById<TextView>(R.id.textFeed).setOnClickListener {
+        textFeedButton.setOnClickListener {
             fetchPostsFromApi() // Afficher les posts généraux
+            textFeedButton.setTextColor("#FFFFFF".toColorInt())
+            textFollowedButton.setTextColor("#878787".toColorInt())
         }
 
         // Filtrer par "Suivis"
-        findViewById<TextView>(R.id.textFollowing).setOnClickListener {
-            // fetchFollowedPosts() // À décommenter lorsque cette fonction est prête
+        textFollowedButton.setOnClickListener {
+            fetchPostsFollowedFromApi() // Afficher les posts des utilisateurs suivis
+            textFollowedButton.setTextColor("#FFFFFF".toColorInt())
+            textFeedButton.setTextColor("#878787".toColorInt())
         }
 
         // Icône de Profil : Aller à l'activité Profil
@@ -72,6 +85,7 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileOtherActivity::class.java)
             intent.putExtra("USER_ID", user.id)
             startActivity(intent)
+            finish()
         }
 
         // Initialiser le RecyclerView
@@ -86,31 +100,55 @@ class HomeActivity : AppCompatActivity() {
         fetchPostsFromApi()
     }
 
-    private fun fetchPostsFromApi() {
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url("http://10.0.2.2:8000/posts") // Remplace avec l'URL correcte
-            .build()
+    private fun fetchPostsFollowedFromApi() {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitInstance.api.getFollowedPosts(user.id)
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                // Gérer l'erreur
-                Log.e("HomeActivity", "Erreur de réseau: ${e.message}")
-            }
+                if(response.isSuccessful && response.body() != null) {
+                    val apiResponse = response.body()
 
-            override fun onResponse(call: Call, response: Response) {
-                response.body?.string()?.let { jsonString ->
-                    val gson = Gson()
-                    val type = object : TypeToken<ApiResponse>() {}.type
-                    val apiResponse: ApiResponse = gson.fromJson(jsonString, type)
-
-                    runOnUiThread {
+                    launch(Dispatchers.Main) {
                         posts.clear()
-                        posts.addAll(apiResponse.posts)
+                        posts.addAll(apiResponse!!.posts)
                         postAdapter.notifyDataSetChanged()
                     }
+                } else {
+                    launch(Dispatchers.Main) {
+                        Log.e("HomeActivity", "Erreur lors de la récupération des posts : ${response.message()}")
+                    }
+                }
+            } catch (e: Exception) {
+                launch(Dispatchers.Main) {
+                    Log.e("HomeActivity", "Erreur réseau: ${e.message}")
                 }
             }
-        })
+        }
+    }
+
+    private fun fetchPostsFromApi() {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitInstance.api.getPosts()
+
+                if (response.isSuccessful && response.body() != null) {
+                    val apiResponse = response.body()
+
+                    launch(Dispatchers.Main) {
+                        posts.clear()
+                        posts.addAll(apiResponse!!.posts)
+                        postAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                    launch(Dispatchers.Main) {
+                        Log.e("HomeActivity", "Erreur lors de la récupération des posts : ${response.message()}")
+                    }
+                }
+            } catch (e: Exception) {
+                launch(Dispatchers.Main) {
+                    Log.e("HomeActivity", "Erreur réseau: ${e.message}")
+                }
+            }
+        }
     }
 }

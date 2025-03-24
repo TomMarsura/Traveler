@@ -47,7 +47,7 @@
                 android:id="@+id/textFeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fil d'actualité"
+                android:text="@string/feed_posts"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:padding="8dp"/>
@@ -56,8 +56,9 @@
                 android:id="@+id/textFollowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Suivis"
-                android:textColor="@android:color/white"
+                android:text="@string/followed_posts"
+                android:textColor="#878787"
+                android:textStyle="bold"
                 android:padding="8dp"/>
         </LinearLayout>
 

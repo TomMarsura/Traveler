@@ -39,6 +39,22 @@ class UserManager(context: Context) {
         }
     }
 
+    fun setLogin(login: String) {
+        val user = getUser()
+        if (user != null) {
+            val updatedUser = user.copy(login = login)
+            saveUser(updatedUser)
+        }
+    }
+
+    fun setUsername(username: String) {
+        val user = getUser()
+        if (user != null) {
+            val updatedUser = user.copy(username = username)
+            saveUser(updatedUser)
+        }
+    }
+
     fun toggleFollowUser(userId: String) {
         val user = getUser()
         if (user != null) {
@@ -59,6 +75,14 @@ class UserManager(context: Context) {
                 nbFollowers = updatedNbFollowers
             )
 
+            saveUser(updatedUser)
+        }
+    }
+
+    fun setBio(bio: String) {
+        val user = getUser()
+        if (user != null) {
+            val updatedUser = user.copy(bio = bio)
             saveUser(updatedUser)
         }
     }

@@ -67,11 +67,20 @@ class PostAdapter(
         var isLiked = user.posts_liked.contains(post.id)
         var isSaved = user.posts_saved.contains(post.id)
 
+        println("Posts_saved : {${user.posts_saved}}")
+
         // Modifier l'état du bouton like (changer en rouge si liké)
         if (isLiked) {
             holder.postLikeButton.setImageResource(R.drawable.ic_heart_filled)
         } else {
             holder.postLikeButton.setImageResource(R.drawable.ic_heart_outline)
+        }
+
+        // Modifier l'état du bouton enregistrer (changer en rouge si enregistré)
+        if (isSaved) {
+            holder.postBookmarkButton.setImageResource(R.drawable.ic_bookmark_border_filled)
+        } else {
+            holder.postBookmarkButton.setImageResource(R.drawable.ic_bookmark_border)
         }
 
         // Gestion des clics sur le bouton "Like"
@@ -261,7 +270,6 @@ class PostAdapter(
                         println("Erreur lors de l'ajout du commentaire: ${e.message}")
                     }
                 }
-
             }
         }
 

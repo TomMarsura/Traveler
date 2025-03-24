@@ -13,5 +13,13 @@
     <string name="login_text">Login</string>
     <string name="following_button">Following</string>
     <string name="error_register">Please fill in all fields and ensure the \npassword is at least 6 characters long.</string>
+    <string name="feed_posts">Feed</string>
+    <string name="followed_posts">Followed</string>
+    <string name="change_profile_picture">Change profile picture</string>
+    <string name="change_login">Change login</string>
+    <string name="change_username">Change username</string>
+    <string name="change_password">Change password</string>
+    <string name="save_button">Save changes</string>
+    <string name="bio_hint">Your bio...</string>
     <!-- Strings used for fragments for navigation -->
 </resources>
