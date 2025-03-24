@@ -49,15 +49,28 @@ class ProfileOtherActivity : AppCompatActivity() {
             finish()
         }
 
-        if(currentUser?.id == user_id) {
+        val savedPostsButton: Button = findViewById(R.id.savedPostsButton)
+
+        if (currentUser?.id == user_id) {
+            savedPostsButton.visibility = View.VISIBLE
+            savedPostsButton.setOnClickListener {
+                val Intent = Intent(this, SavedPostsActivity::class.java)
+                startActivity(Intent)
+                finish()
+                Toast.makeText(this, "Affichage des posts sauvegardés", Toast.LENGTH_SHORT).show()
+            }
+
+            // Print visibilité savedPostsButton
+            println("savedPostsButton.visibility : ${savedPostsButton.visibility}")
+
             findViewById<ImageView>(R.id.editProfileButton).visibility = View.VISIBLE
             findViewById<ImageView>(R.id.editProfileButton).setOnClickListener {
                 startActivity(Intent(this, EditProfileActivity::class.java))
                 finish()
             }
+
             followButton.visibility = View.GONE
             reportButton.visibility = View.GONE
-
         } else {
             reportButton.setOnClickListener {
                 showReportMenu(it)

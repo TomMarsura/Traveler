@@ -68,6 +68,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="4dp"/>
 
+    <!-- Bouton Posts Sauvegardés -->
+    <Button
+        android:id="@+id/savedPostsButton"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:backgroundTint="#ff9900"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Posts sauvegardés"
+        android:drawableStart="@drawable/ic_bookmark_border"
+        android:drawablePadding="8dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/userBio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+
     <!-- Bouton Suivre -->
     <Button
         android:id="@+id/followButton"
@@ -76,10 +93,11 @@
         android:backgroundTint="#2881FF"
         android:fontFamily="@font/montserrat_semibold"
         android:text="@string/follow_button"
-        app:layout_constraintTop_toBottomOf="@id/userBio"
+        app:layout_constraintTop_toBottomOf="@id/savedPostsButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
+
 
     <!-- Bouton Suivi -->
     <Button

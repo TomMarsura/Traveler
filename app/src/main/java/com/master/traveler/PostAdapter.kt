@@ -101,7 +101,7 @@ class PostAdapter(
         // Gestion des clics sur le bouton "Enregistrer" (Signet)
         holder.postBookmarkButton.setOnClickListener {
             isSaved = !isSaved
-            onSaveClicked(holder, post.id, isSaved)
+            onSaveClicked(holder, post.id, isSaved, UserManager(holder.itemView.context))
         }
     }
 
@@ -159,7 +159,7 @@ class PostAdapter(
         }
     }
 
-    fun onSaveClicked(holder: PostViewHolder, postId: String, isSaved: Boolean) {
+    fun onSaveClicked(holder: PostViewHolder, postId: String, isSaved: Boolean, userManager: UserManager) {
         GlobalScope.launch(Dispatchers.IO){
             try {
                 val response : Response<ApiResponse> = RetrofitInstance.api.savePost(postId, user.id, isSaved)
@@ -167,8 +167,10 @@ class PostAdapter(
                 if(response.isSuccessful){
                     if(isSaved) {
                         holder.postBookmarkButton.setImageResource(R.drawable.ic_bookmark_border_filled)
+                        userManager.toggleSavePost(postId)
                     } else {
                         holder.postBookmarkButton.setImageResource(R.drawable.ic_bookmark_border)
+                        userManager.toggleSavePost(postId)
                     }
                 } else {
                     println("Error saving post")
