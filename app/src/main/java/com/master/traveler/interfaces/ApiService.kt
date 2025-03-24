@@ -112,4 +112,9 @@ interface ApiService {
     @GET("config/get_profile_pictures")
     suspend fun getProfileImages(): Response<ApiResponse>
 
+    @GET("posts/get_saved_posts/{userId}")
+    suspend fun getSavedPosts(
+        @Path("userId") userId: String
+    ): Response<ApiResponse>
+
 }

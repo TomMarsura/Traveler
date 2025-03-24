@@ -39,6 +39,20 @@ class UserManager(context: Context) {
         }
     }
 
+    fun toggleSavePost(postId: String) {
+        val user = getUser()
+        if (user != null) {
+            val updatedPostsSaved = if (user.posts_saved.contains(postId)) {
+                user.posts_saved - postId
+            } else {
+                user.posts_saved + postId
+            }
+
+            val updatedUser = user.copy(posts_saved = updatedPostsSaved)
+            saveUser(updatedUser)
+        }
+    }
+
     fun setLogin(login: String) {
         val user = getUser()
         if (user != null) {

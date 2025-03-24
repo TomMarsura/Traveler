@@ -41,6 +41,10 @@
             android:exported="true"
             android:theme="@style/Theme.Traveler">
         </activity>
+        <activity android:name=".SavedPostsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Traveler">
+        </activity>
     </application>
 
 </manifest>
