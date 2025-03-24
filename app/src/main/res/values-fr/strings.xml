@@ -14,4 +14,12 @@
     <string name="login_text">Identifiant</string>
     <string name="following_button">Suivi</string>
     <string name="error_register">Veuillez remplir tous les champs et \nvérifiez que votre mot de passe fait \nau moins 6 caractères.</string>
+    <string name="feed_posts">Fil d\'actualité</string>
+    <string name="followed_posts">Suivis</string>
+    <string name="change_profile_picture">Changer image de profil</string>
+    <string name="change_login">Changer le login</string>
+    <string name="change_username">Changer le surnom</string>
+    <string name="change_password">Changer le mot de passe</string>
+    <string name="save_button">Sauvegarder</string>
+    <string name="bio_hint">Votre bio...</string>
 </resources>

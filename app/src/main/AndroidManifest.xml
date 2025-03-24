@@ -37,6 +37,10 @@
             android:exported="true"
             android:theme="@style/Theme.Traveler">
         </activity>
+        <activity android:name=".EditProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Traveler">
+        </activity>
     </application>
 
 </manifest>

@@ -35,6 +35,7 @@ class ProfileOtherActivity : AppCompatActivity() {
         val user_id = intent.getStringExtra("USER_ID")
 
         val followButton: Button = findViewById(R.id.followButton)
+        val reportButton: ImageView = findViewById(R.id.reportImage)
 
         userManager = UserManager(this)
         currentUser = userManager.getUser()
@@ -48,17 +49,28 @@ class ProfileOtherActivity : AppCompatActivity() {
             finish()
         }
 
-        findViewById<ImageView>(R.id.reportImage).setOnClickListener {
-            showReportMenu(it)
-        }
+        if(currentUser?.id == user_id) {
+            findViewById<ImageView>(R.id.editProfileButton).visibility = View.VISIBLE
+            findViewById<ImageView>(R.id.editProfileButton).setOnClickListener {
+                startActivity(Intent(this, EditProfileActivity::class.java))
+                finish()
+            }
+            followButton.visibility = View.GONE
+            reportButton.visibility = View.GONE
 
-        var isFollowing = currentUser?.following?.contains(user_id) == true
+        } else {
+            reportButton.setOnClickListener {
+                showReportMenu(it)
+            }
 
-        updateFollowButton(followButton, isFollowing)
+            var isFollowing = currentUser?.following?.contains(user_id) == true
 
-        followButton.setOnClickListener {
-            isFollowing = !isFollowing
-            toggleFollowUser(user_id, isFollowing, followButton)
+            updateFollowButton(followButton, isFollowing)
+
+            followButton.setOnClickListener {
+                isFollowing = !isFollowing
+                toggleFollowUser(user_id, isFollowing, followButton)
+            }
         }
     }
 

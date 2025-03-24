@@ -42,13 +42,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
+    <!-- Bouton d'édition du profil -->
+    <ImageView
+        android:id="@+id/editProfileButton"
+        android:layout_width="16sp"
+        android:layout_height="16sp"
+        android:src="@drawable/ic_edit_profile"
+    android:contentDescription="Edit Profile Button"
+    android:visibility="gone"
+    app:layout_constraintTop_toTopOf="@id/userUsername"
+    app:layout_constraintBottom_toBottomOf="@id/userUsername"
+    app:layout_constraintStart_toEndOf="@id/userUsername"
+    android:layout_marginStart="8dp"/>
+
     <!-- Affichage de la bio -->
     <TextView
         android:id="@+id/userBio"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
+        android:fontFamily="@font/montserrat_regular"
         android:textSize="14sp"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/userUsername"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
