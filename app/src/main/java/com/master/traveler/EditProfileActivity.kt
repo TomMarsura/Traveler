@@ -184,7 +184,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun showImageSelectionDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_profile_images, null)
-        val container = dialogView.findViewById<LinearLayout>(R.id.imageContainer)
+        val container = dialogView.findViewById<GridLayout>(R.id.imageContainer)
 
         val dialog = AlertDialog.Builder(this)
             .setTitle("Choisissez une image de profil")

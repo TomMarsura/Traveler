@@ -7,4 +7,12 @@
         <item name="android:shadowDy">2</item>
         <item name="android:shadowRadius">3</item>
     </style>
+
+    <!-- Style pour une ombre sur une image -->
+    <style name="ImageWithShadow">
+        <item name="android:shadowColor">#80000000</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
 </resources>
