@@ -13,7 +13,8 @@
         android:id="@+id/navigationBar"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/navbar"
+        android:layout_margin="5dp"
         android:padding="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +25,7 @@
             android:id="@+id/buttonHome"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_home"
+            android:src="@drawable/ic_home_light"
             android:contentDescription="Accueil"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/feed_posts"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text"
                 android:textStyle="bold"
                 android:padding="8dp"/>
 
@@ -57,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/followed_posts"
-                android:textColor="#878787"
+                android:textColor="@color/unselected_text"
                 android:textStyle="bold"
                 android:padding="8dp"/>
         </LinearLayout>

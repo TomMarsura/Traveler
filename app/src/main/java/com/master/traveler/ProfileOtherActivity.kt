@@ -9,6 +9,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -114,10 +115,10 @@ class ProfileOtherActivity : AppCompatActivity() {
     private fun updateFollowButton(button: Button, isFollowing: Boolean) {
         if (isFollowing) {
             button.text = getString(R.string.following_button)
-            button.setBackgroundColor("#636363".toColorInt())
+            button.setBackgroundColor(ContextCompat.getColor(this, R.color.button_light))
         } else {
             button.text = getString(R.string.follow_button)
-            button.setBackgroundColor("#2881FF".toColorInt())
+            button.setBackgroundColor(ContextCompat.getColor(this, R.color.background_light))
         }
     }
 

@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@drawable/post_item">
 
         <!-- Image du post avec infos utilisateur superposées -->
         <FrameLayout
@@ -68,14 +69,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_background_light_red">
 
             <TextView
                 android:id="@+id/postName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:layout_weight="1"/>
 
             <TextView
@@ -83,8 +85,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
@@ -94,7 +96,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="10 jours"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_background_light_blue"
             android:textSize="14sp" />
 
         <LinearLayout

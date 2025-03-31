@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,15 +70,15 @@ class HomeActivity : AppCompatActivity() {
         // Filtrer par "Fil d'actualité"
         textFeedButton.setOnClickListener {
             fetchPostsFromApi() // Afficher les posts généraux
-            textFeedButton.setTextColor("#FFFFFF".toColorInt())
-            textFollowedButton.setTextColor("#878787".toColorInt())
+            textFeedButton.setTextColor(ContextCompat.getColor(this, R.color.text))
+            textFollowedButton.setTextColor(ContextCompat.getColor(this, R.color.unselected_text))
         }
 
         // Filtrer par "Suivis"
         textFollowedButton.setOnClickListener {
             fetchPostsFollowedFromApi() // Afficher les posts des utilisateurs suivis
-            textFollowedButton.setTextColor("#FFFFFF".toColorInt())
-            textFeedButton.setTextColor("#878787".toColorInt())
+            textFollowedButton.setTextColor(ContextCompat.getColor(this, R.color.text))
+            textFeedButton.setTextColor(ContextCompat.getColor(this, R.color.unselected_text))
         }
 
         // Icône de Profil : Aller à l'activité Profil
