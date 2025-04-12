@@ -8,4 +8,5 @@
     <color name="unselected_text">#b5b5b5</color>
     <color name="button_light">#EC9770</color>
     <color name="button_dark">#C7402D</color>
+    <color name="gray_light">#DDDDDD</color>
 </resources>

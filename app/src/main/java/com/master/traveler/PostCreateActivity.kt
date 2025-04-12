@@ -37,6 +37,7 @@ import java.util.UUID
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.withContext
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.time.LocalDate
 
@@ -81,7 +82,7 @@ class PostCreateActivity : AppCompatActivity() {
             finish()
             return
         }
-        findViewById<ImageView>(R.id.backButton).setOnClickListener {
+        findViewById<ImageView>(R.id.id_back_button).setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             intent.putExtra("USER_ID", user.id)
             startActivity(intent)
@@ -174,14 +175,14 @@ class PostCreateActivity : AppCompatActivity() {
             // Création de l'objet Post
             val post = Post(
                 id = postId,
-                user_id = "4dbe922b-0d19-46f7-872f-84441b8934c8",
+                user_id = user.id,
                 name = destination,
                 post_date = LocalDate.now().toString(),
                 travel_infos = travelInfos,  // Utilise l'objet TravelInfos ici
                 total_price = binding.idPrice.text.toString().toInt(),
                 presentation = Presentation(
                     image = pic[0].url,
-                    total_time = 14,
+                    total_time = binding.idDuration.text.toString().toInt(),
                     card_color = "#A67D56",
                     text_color = "#FFFFFF"
                 ),
@@ -196,6 +197,12 @@ class PostCreateActivity : AppCompatActivity() {
                     val response = RetrofitInstance.api.addPost(post)
                     if (response.isSuccessful && response.body()?.code == 200) {
                         println("Post ajouté avec succès")
+                        withContext(Dispatchers.Main) {
+                            val intent = Intent(this@PostCreateActivity, HomeActivity::class.java)
+                            intent.putExtra("USER_ID", user.id)
+                            startActivity(intent)
+                            finish()
+                        }
                     } else {
                         println("Erreur lors de l'ajout du post : ${response.errorBody()?.string()}")
                     }
@@ -278,6 +285,21 @@ class PostCreateActivity : AppCompatActivity() {
             updateTotal()
         }
 
+        binding.idCheckboxPlane.setOnCheckedChangeListener { _, isChecked ->
+            binding.idSpinnerCompany.isEnabled = isChecked
+            binding.idPrice.isEnabled = isChecked
+            binding.idLinkFlight.isEnabled = isChecked
+
+            binding.idPrice.isFocusable = isChecked
+            binding.idPrice.isFocusableInTouchMode = isChecked
+
+            binding.idLinkFlight.isFocusable = isChecked
+            binding.idLinkFlight.isFocusableInTouchMode = isChecked
+
+            binding.idPrice.alpha = if (isChecked) 1f else 0.5f
+            binding.idLinkFlight.alpha = if (isChecked) 1f else 0.5f
+            binding.idSpinnerCompany.alpha = if (isChecked) 1f else 0.5f
+        }
 
     }
 

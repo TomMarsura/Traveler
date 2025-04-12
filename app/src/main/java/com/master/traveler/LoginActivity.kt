@@ -152,7 +152,6 @@ class LoginActivity : AppCompatActivity() {
                 Activity(
                     name = "Machu Picchu",
                     price = 60f, // Utilise un Float
-                    address = "Peru"
                 )
             ),
             accommodations = listOf(
