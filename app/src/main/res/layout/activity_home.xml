@@ -87,5 +87,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:scrollbars="vertical"/>
+    <ImageButton
+        android:id="@+id/id_btn_add_post"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_add_post"
+        android:background="@android:color/transparent"
+        android:contentDescription="Ajouter un post"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="8dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
