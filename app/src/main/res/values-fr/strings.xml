@@ -22,4 +22,29 @@
     <string name="change_password">Changer le mot de passe</string>
     <string name="save_button">Sauvegarder</string>
     <string name="bio_hint">Votre bio...</string>
+    <string name="title_post">Poste ton voyage !</string>
+    <string name="destination">Nom du voyage</string>
+    <string name="activity_name">Lieu / Activité..</string>
+    <string name="activity_price">Prix (€)</string>
+    <string-array name="accommodation_types">
+        <item>Nourriture</item>
+        <item>Hôtel</item>
+        <item>Transport</item>
+    </string-array>
+    <string-array name="company">
+        <item>Choisir une compagnie</item>
+        <item>Air France</item>
+        <item>Lufthansa</item>
+        <item>Qatar Airways</item>
+        <item>Emirates</item>
+    </string-array>
+    <string name="accommodation_name">%1$s</string>
+    <string name="plane_travel">Déplacement en avion</string>
+    <string name="flight_price">Prix du vol</string>
+    <string name="flight_link">Lien du vol</string>
+    <string name="photo_add">Ajouter une photo</string>
+    <string name="description">Description du voyage</string>
+    <string name="continue_btn">Continuer</string>
+    <string name="duration">Durée du voyage</string>
+
 </resources>

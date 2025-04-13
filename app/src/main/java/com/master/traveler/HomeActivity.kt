@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings.Global
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -99,6 +100,13 @@ class HomeActivity : AppCompatActivity() {
 
         // Charger les posts depuis l'API
         fetchPostsFromApi()
+
+        val addPostButton: ImageButton = findViewById(R.id.id_btn_add_post)
+        addPostButton.setOnClickListener {
+            val intent = Intent(this, PostCreateActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun fetchPostsFollowedFromApi() {

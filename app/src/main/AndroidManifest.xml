@@ -45,6 +45,11 @@
             android:exported="true"
             android:theme="@style/Theme.Traveler">
         </activity>
+        <activity
+            android:name=".PostCreateActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Traveler">
+        </activity>
     </application>
 
 </manifest>

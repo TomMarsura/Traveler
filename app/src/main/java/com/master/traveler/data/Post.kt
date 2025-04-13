@@ -56,7 +56,6 @@ data class CompanyInfos(
 data class Activity(
     val name: String,
     val price: Float,
-    val address: String
 )
 
 data class Accommodation(
@@ -95,4 +94,13 @@ data class Comment(
     val user_id: String,
     val login: String,
     val comment: String
+)
+
+data class FreeImageResponse(
+    val status_code: Int,
+    val image: ImageData?
+)
+
+data class ImageData(
+    val url: String
 )

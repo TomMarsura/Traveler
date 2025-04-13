@@ -21,5 +21,30 @@
     <string name="change_password">Change password</string>
     <string name="save_button">Save changes</string>
     <string name="bio_hint">Your bio...</string>
+    <string name="title_post">Post your travel</string>
+    <string name="destination">Name of your travel</string>
+    <string name="activity_name">Place or Activity</string>
+    <string name="activity_price">Price (€)</string>
+    <string-array name="accommodation_types">
+        <item>Food</item>
+        <item>Hotel</item>
+        <item>Transport</item>
+    </string-array>
+    <string-array name="company">
+        <item>Choose a company</item>
+        <item>Air France</item>
+        <item>Lufthansa</item>
+        <item>Qatar Airways</item>
+        <item>Emirates</item>
+    </string-array>
+    <string name="accommodation_name">%1$s name</string>
+    <string name="plane_travel">Travel by plane</string>
+    <string name="flight_price">Flight price (€)</string>
+    <string name="flight_link">Flight link</string>
+    <string name="photo_add">Add photo</string>
+    <string name="description">Description of the trip</string>
+    <string name="continue_btn">Next</string>
+    <string name="duration">Duration of the trip</string>
+
     <!-- Strings used for fragments for navigation -->
 </resources>

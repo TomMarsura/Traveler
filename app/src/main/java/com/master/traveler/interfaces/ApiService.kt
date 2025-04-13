@@ -2,6 +2,7 @@ package com.master.traveler.interfaces
 
 import com.master.traveler.data.ApiResponse
 import com.master.traveler.data.Comment
+import com.master.traveler.data.FreeImageResponse
 import com.master.traveler.data.Post
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -108,6 +109,14 @@ interface ApiService {
         @Path("userId") userId: String,
         @Body imageUrl: Map<String, String>
     ): Response<ApiResponse>
+
+    @Multipart
+    @POST("api/1/upload")
+    suspend fun uploadImage(
+        @Part("key") apiKey: RequestBody,
+        @Part image: MultipartBody.Part,
+        @Part("format") format: RequestBody
+    ): Response<FreeImageResponse>
 
     @GET("config/get_profile_pictures")
     suspend fun getProfileImages(): Response<ApiResponse>
