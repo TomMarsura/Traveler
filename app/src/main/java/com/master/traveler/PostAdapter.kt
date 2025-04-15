@@ -63,6 +63,14 @@ class PostAdapter(
             holder.itemView.context.startActivity(intent)
         }
 
+        // Clic sur la carte du post : ouvrir PostActivity
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, PostActivity::class.java)
+            intent.putExtra("postId", post.id)
+            context.startActivity(intent)
+        }
+
         // Vérifier si ce post est liké par l'utilisateur
         var isLiked = user.posts_liked.contains(post.id)
         var isSaved = user.posts_saved.contains(post.id)

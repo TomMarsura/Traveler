@@ -9,6 +9,7 @@ data class ApiResponse(
     val user: User,
     val profilePicture: String,
     val images: List<String>,
+    val post: Post,
 )
 
 data class PostHome(

@@ -45,6 +45,16 @@
     <string name="description">Description of the trip</string>
     <string name="continue_btn">Next</string>
     <string name="duration">Duration of the trip</string>
+    <string name="post_date">Posted on %s</string>
+    <string name="travel_dates">From %s to %s</string>
+    <string name="flight_infos">Flight with %s - %2$.2f €</string>
+    <string name="hostels">Hostels</string>
+    <string name="food">Food</string>
+    <string name="transport">Travel</string>
+    <string name="expenses">Expenses</string>
+    <string name="activities">Activities</string>
+    <string name="description_infos">Description</string>
+    <string name="post_details">Details of the travel</string>
 
     <!-- Strings used for fragments for navigation -->
 </resources>

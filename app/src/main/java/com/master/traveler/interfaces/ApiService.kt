@@ -126,4 +126,10 @@ interface ApiService {
         @Path("userId") userId: String
     ): Response<ApiResponse>
 
+    @GET("posts/get_post/{postId}")
+    suspend fun getPost(
+        @Path("postId") postId: String
+    ): Response<ApiResponse>
+
+
 }

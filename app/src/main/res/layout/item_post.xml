@@ -12,22 +12,20 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:gravity="center_vertical"
-        android:background="@drawable/post_item">
+        android:background="@drawable/post_item_acrylic">
 
-        <!-- Image du post avec infos utilisateur superposées -->
+        <!-- Image avec infos utilisateur -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginBottom="8dp">
 
-            <!-- Image du post -->
             <ImageView
                 android:id="@+id/postImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"/>
 
-            <!-- Infos utilisateur superposées en haut à gauche -->
             <LinearLayout
                 android:id="@+id/userInfo"
                 android:clickable="true"
@@ -41,7 +39,6 @@
                 android:padding="4dp"
                 android:elevation="2dp">
 
-                <!-- Image de l'utilisateur -->
                 <ImageView
                     android:id="@+id/userProfileImage"
                     android:layout_width="25dp"
@@ -50,7 +47,6 @@
                     android:src="@drawable/ic_launcher_background"
                     android:background="@drawable/ic_launcher_foreground"/>
 
-                <!-- Nom de l'utilisateur -->
                 <TextView
                     android:id="@+id/userName"
                     android:layout_width="wrap_content"
@@ -61,49 +57,13 @@
                     android:maxLines="1"
                     android:ellipsize="end"/>
             </LinearLayout>
-
         </FrameLayout>
 
-        <!-- Première ligne : Nom et Prix -->
+        <!-- Barre d'interactions -->
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:background="@drawable/rounded_background_light_red">
-
-            <TextView
-                android:id="@+id/postName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:id="@+id/postPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/postTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="10 jours"
-            android:textColor="@android:color/white"
-            android:background="@drawable/rounded_background_light_blue"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:gravity="center|start"
             android:orientation="horizontal"
             android:weightSum="3">
@@ -141,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
@@ -155,5 +115,45 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_bookmark_border" />
         </LinearLayout>
+
+        <!-- Nom et Prix -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_background_light_red"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/postName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/postPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:padding="4dp" />
+        </LinearLayout>
+
+        <!-- Durée du voyage -->
+        <TextView
+            android:id="@+id/postTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14 jours"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_background_light_blue"
+            android:textSize="14sp"
+            android:padding="6dp"
+            android:layout_marginBottom="8dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

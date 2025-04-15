@@ -46,5 +46,15 @@
     <string name="description">Description du voyage</string>
     <string name="continue_btn">Continuer</string>
     <string name="duration">Durée du voyage</string>
+    <string name="post_date">Posté le %s</string>
+    <string name="travel_dates">Du %s au %s</string>
+    <string name="flight_infos">Vol avec %s - %2$.2f €</string>
+    <string name="hostels">Hôtels</string>
+    <string name="food">Nourriture</string>
+    <string name="transport">Transports</string>
+    <string name="expenses">Dépenses</string>
+    <string name="activities">Activités</string>
+    <string name="description_infos">Description</string>
+    <string name="post_details">Détails du voyage</string>
 
 </resources>

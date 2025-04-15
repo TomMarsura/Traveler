@@ -50,6 +50,12 @@
             android:exported="true"
             android:theme="@style/Theme.Traveler">
         </activity>
+        <activity android:name=".PostActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Traveler">
+        </activity>
+        <activity android:name=".ImageFullscreenActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>
