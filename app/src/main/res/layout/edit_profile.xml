@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:contentDescription="Retour"
-        android:src="@drawable/ic_back_arrow"
+        android:src="@drawable/ic_back_arrow_blue"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -106,7 +106,7 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/bio_hint"
-                android:background="@drawable/post_item"
+                android:background="@drawable/post_item_acrylic"
                 android:padding="12dp"
                 android:textColorHint="#ababab"
                 android:textColor="@color/black"
