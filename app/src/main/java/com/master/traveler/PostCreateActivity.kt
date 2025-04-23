@@ -73,7 +73,10 @@ class PostCreateActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Appliquer l'état initial (grisé ou non) des champs liés à l'avion
+
+        binding = PostCreationActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         binding.idCheckboxPlane.isChecked = false
         binding.idSpinnerCompany.isEnabled = false
         binding.idPrice.isEnabled = false
@@ -88,8 +91,7 @@ class PostCreateActivity : AppCompatActivity() {
         binding.idLinkFlight.alpha = 0.5f
         binding.idSpinnerCompany.alpha = 0.5f
 
-        binding = PostCreationActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
 
         val userManager = UserManager(this)
         user = userManager.getUser() ?: run {
