@@ -73,6 +73,20 @@ class PostCreateActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Appliquer l'état initial (grisé ou non) des champs liés à l'avion
+        binding.idCheckboxPlane.isChecked = false
+        binding.idSpinnerCompany.isEnabled = false
+        binding.idPrice.isEnabled = false
+        binding.idLinkFlight.isEnabled = false
+
+        binding.idPrice.isFocusable = false
+        binding.idPrice.isFocusableInTouchMode = false
+        binding.idLinkFlight.isFocusable = false
+        binding.idLinkFlight.isFocusableInTouchMode = false
+
+        binding.idPrice.alpha = 0.5f
+        binding.idLinkFlight.alpha = 0.5f
+        binding.idSpinnerCompany.alpha = 0.5f
 
         binding = PostCreationActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -149,6 +163,11 @@ class PostCreateActivity : AppCompatActivity() {
             }
 
             val pic = imageUrls.map { Picture(url = it) }
+
+            val start = LocalDate.ofEpochDay(binding.idCalendarStart.date / (24 * 60 * 60 * 1000))
+            val end = LocalDate.ofEpochDay(binding.idCalendarEnd.date / (24 * 60 * 60 * 1000))
+            val duration = kotlin.math.max(1, java.time.temporal.ChronoUnit.DAYS.between(start, end).toInt())
+
             val postId = UUID.randomUUID().toString()
             val list = mutableActivities.toList()
             val travelInfos = TravelInfos(
@@ -182,7 +201,7 @@ class PostCreateActivity : AppCompatActivity() {
                 total_price = binding.idPrice.text.toString().toInt(),
                 presentation = Presentation(
                     image = pic[0].url,
-                    total_time = binding.idDuration.text.toString().toInt(),
+                    total_time = duration,
                     card_color = "#A67D56",
                     text_color = "#FFFFFF"
                 ),

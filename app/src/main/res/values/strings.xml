@@ -44,7 +44,6 @@
     <string name="photo_add">Add photo</string>
     <string name="description">Description of the trip</string>
     <string name="continue_btn">Next</string>
-    <string name="duration">Duration of the trip</string>
     <string name="post_date">Posted on %s</string>
     <string name="travel_dates">From %s to %s</string>
     <string name="flight_infos">Flight with %s - %2$.2f €</string>
