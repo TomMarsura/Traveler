@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
@@ -52,13 +53,23 @@ class ProfileOtherActivity : AppCompatActivity() {
 
         val savedPostsButton: Button = findViewById(R.id.savedPostsButton)
 
+        val logoutButton: ImageButton = findViewById(R.id.logoutButton)
+
         if (currentUser?.id == user_id) {
+            logoutButton.visibility = View.VISIBLE
+            logoutButton.setOnClickListener {
+                userManager.clearUser()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+
             savedPostsButton.visibility = View.VISIBLE
             savedPostsButton.setOnClickListener {
                 val Intent = Intent(this, SavedPostsActivity::class.java)
                 startActivity(Intent)
                 finish()
-                Toast.makeText(this, "Affichage des posts sauvegardés", Toast.LENGTH_SHORT).show()
             }
 
             // Print visibilité savedPostsButton
@@ -73,6 +84,7 @@ class ProfileOtherActivity : AppCompatActivity() {
             followButton.visibility = View.GONE
             reportButton.visibility = View.GONE
         } else {
+            logoutButton.visibility = View.GONE
             reportButton.setOnClickListener {
                 showReportMenu(it)
             }

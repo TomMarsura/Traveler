@@ -89,9 +89,9 @@
         android:scrollbars="vertical"/>
     <ImageButton
         android:id="@+id/id_btn_add_post"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:background="@drawable/ic_add_post"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_add"
         android:contentDescription="Ajouter un post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

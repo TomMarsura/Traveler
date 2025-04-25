@@ -113,16 +113,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
-    <!-- Bouton d'options -->
-    <ImageButton
-        android:id="@+id/reportImage"
+    <LinearLayout
+        android:id="@+id/topButtonsContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/button_dark"
+        android:orientation="horizontal"
         android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/stat_sys_warning" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/logoutButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:contentDescription="Déconnexion"
+            android:src="@drawable/ic_disconnect"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent" />
+
+        <ImageButton
+            android:id="@+id/reportImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/button_dark"
+            android:contentDescription="Signaler"
+            android:src="@android:drawable/stat_sys_warning"
+            android:scaleType="centerInside"
+            android:padding="8dp" />
+    </LinearLayout>
+
 
     <!-- RecyclerView pour afficher les posts de l'utilisateur -->
     <androidx.recyclerview.widget.RecyclerView

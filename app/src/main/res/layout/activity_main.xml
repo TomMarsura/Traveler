@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/background_main"/>
+        android:src="@drawable/background"/>
 
     <Button
         android:id="@+id/login_button"
@@ -60,7 +60,7 @@
         style="@style/TextWithShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/montserrat_semibold"
         android:shadowColor="@color/black"
         android:text="@string/login_text"
         android:textColor="@color/white"
@@ -94,7 +94,7 @@
         style="@style/TextWithShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/montserrat_semibold"
         android:shadowColor="@color/black"
         android:text="@string/password_text"
         android:textColor="@color/white"
@@ -125,6 +125,7 @@
 
     <TextView
         android:id="@+id/app_name"
+        style="@style/TextWithShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_black"
@@ -143,7 +144,7 @@
         style="@style/TextWithShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_thin"
+        android:fontFamily="@font/montserrat_semibold"
         android:text="PARTEZ, DÉCOUVREZ, RACONTEZ"
         android:textColor="@color/white"
         android:textSize="12sp"
