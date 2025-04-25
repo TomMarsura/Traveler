@@ -39,7 +39,10 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.withContext
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 
 
 class PostCreateActivity : AppCompatActivity() {
@@ -70,12 +73,30 @@ class PostCreateActivity : AppCompatActivity() {
                 }
             }
         }
+    private var selectedStartDate: Long = 0L
+    private var selectedEndDate: Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = PostCreationActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        var start = ""
+        var end = ""
+
+// Récupérer la date par défaut à l'ouverture
+        start = formatDate(binding.idCalendarStart.date)
+        end = formatDate(binding.idCalendarEnd.date)
+
+// Mettre à jour automatiquement quand l'utilisateur change une date
+        binding.idCalendarStart.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            start = String.format(Locale.US, "%04d-%02d-%02d", year, month + 1, dayOfMonth)
+        }
+
+        binding.idCalendarEnd.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            end = String.format(Locale.US, "%04d-%02d-%02d", year, month + 1, dayOfMonth)
+        }
 
         binding.idCheckboxPlane.isChecked = false
         binding.idSpinnerCompany.isEnabled = false
@@ -113,15 +134,52 @@ class PostCreateActivity : AppCompatActivity() {
             updateTotal()
         }
         binding.idBtnContinue.setOnClickListener {
-            val destination = binding.idDestination.text.toString()
-            val price = binding.idPrice.text.toString().toFloat()
             val description = binding.idDescription.text.toString()
-            val link = binding.idLinkFlight.text.toString()
             val mutableActivities = mutableListOf<Activity>()
             val foodList = mutableListOf<Food>()
             val hotelList = mutableListOf<Hotel>()
             val transportList = mutableListOf<Transport>()
             val imageUrls = mutableListOf<String>()
+            val destination = binding.idDestination.text.toString().trim()
+            val isPlaneChecked = binding.idCheckboxPlane.isChecked
+            val priceStr = binding.idPrice.text.toString().trim()
+            val link = binding.idLinkFlight.text.toString().trim()
+            val selectedCompany = binding.idSpinnerCompany.selectedItem.toString()
+            val companyInfos: CompanyInfos
+
+            if (destination.isEmpty()) {
+                Toast.makeText(this, "Veuillez entrer une destination", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+            if (isPlaneChecked) {
+                val priceValue = priceStr.toFloatOrNull()
+                if (selectedCompany.isEmpty() || priceStr.isEmpty() || link.isEmpty() || priceValue == null || priceValue <= 0f) {
+                    Toast.makeText(this, "Veuillez compléter correctement les informations de vol", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                companyInfos = CompanyInfos(
+                    name = selectedCompany,
+                    price = priceValue,
+                    flight_link = link
+                )
+            } else {
+                companyInfos = CompanyInfos(
+                    name = "",
+                    price = 0f,
+                    flight_link = ""
+                )
+            }
+
+            // Validation 3 : au moins une image uploadée
+            if (binding.idPhotoGallery.childCount == 0) {
+                Toast.makeText(this, "Veuillez ajouter au moins une photo", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val price = priceStr.toFloatOrNull() ?: 0f
 
             for (i in 0 until binding.idPlacesList.childCount) {
                 val row = binding.idPlacesList.getChildAt(i) as? LinearLayout ?: continue
@@ -146,13 +204,13 @@ class PostCreateActivity : AppCompatActivity() {
 
                 val type = nameEditText.tag.toString()
                 val name = nameEditText.text.toString().trim()
-                val priceTemp = priceEditText.text.toString().toFloatOrNull() ?: 0f
+                val price = priceEditText.text.toString().toFloatOrNull() ?: 0f
 
                 if (name.isNotEmpty()) {
                     when (type) {
                         "Food" -> foodList.add(Food(name, price))
                         "Hotel" -> hotelList.add(Hotel(name, price))
-                        "Transport" -> transportList.add(Transport(name, priceTemp))
+                        "Transport" -> transportList.add(Transport(name, price))
                     }
                 }
             }
@@ -166,21 +224,14 @@ class PostCreateActivity : AppCompatActivity() {
 
             val pic = imageUrls.map { Picture(url = it) }
 
-            val start = LocalDate.ofEpochDay(binding.idCalendarStart.date / (24 * 60 * 60 * 1000))
-            val end = LocalDate.ofEpochDay(binding.idCalendarEnd.date / (24 * 60 * 60 * 1000))
-            val duration = kotlin.math.max(1, java.time.temporal.ChronoUnit.DAYS.between(start, end).toInt())
 
             val postId = UUID.randomUUID().toString()
             val list = mutableActivities.toList()
             val travelInfos = TravelInfos(
-                arrival_date =binding.idCalendarStart.date.toString(),
-                departure_date = binding.idCalendarEnd.date.toString(),
+                arrival_date = end,
+                departure_date = start,
                 airplane = binding.idCheckboxPlane.isChecked,
-                company_infos = CompanyInfos(
-                    name = binding.idSpinnerCompany.selectedItem.toString(),
-                    price = price, // Utilise un Float
-                    flight_link = link
-                ),
+                company_infos = companyInfos,
                 activities = list,
                 accommodations = listOf(
                     Accommodation(
@@ -194,13 +245,22 @@ class PostCreateActivity : AppCompatActivity() {
             )
 
             // Création de l'objet Post
+            val startDate = LocalDate.parse(start)
+            val endDate = LocalDate.parse(end)
+            val duration = ChronoUnit.DAYS.between(startDate, endDate).toInt()
+
+            if (duration < 0) {
+                Toast.makeText(this, "La date de fin ne peut pas être avant la date de début", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val post = Post(
                 id = postId,
                 user_id = user.id,
                 name = destination,
                 post_date = LocalDate.now().toString(),
                 travel_infos = travelInfos,  // Utilise l'objet TravelInfos ici
-                total_price = binding.idPrice.text.toString().toInt(),
+                total_price = price.toInt(),
                 presentation = Presentation(
                     image = pic[0].url,
                     total_time = duration,
@@ -378,6 +438,12 @@ class PostCreateActivity : AppCompatActivity() {
             Log.e("UPLOAD", "Erreur: ${response.errorBody()?.string()}")
             null
         }
+    }
+    private fun formatDate(dateInMillis: Long): String {
+        val localDate = Instant.ofEpochMilli(dateInMillis)
+            .atZone(ZoneId.systemDefault())
+            .toLocalDate()
+        return localDate.toString() // Renvoie directement "yyyy-MM-dd"
     }
 
 }
