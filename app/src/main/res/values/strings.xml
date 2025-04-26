@@ -54,6 +54,10 @@
     <string name="activities">Activities</string>
     <string name="description_infos">Description</string>
     <string name="post_details">Details of the travel</string>
+    <string name="error_enter_destination">Please enter a destination</string>
+    <string name="error_fill_flight_infos">Please correctly complete the flight information</string>
+    <string name="error_add_at_least_one_photo">Please add at least one photo</string>
+    <string name="error_end_date_before_start">End date cannot be before start date</string>
 
     <!-- Strings used for fragments for navigation -->
 </resources>

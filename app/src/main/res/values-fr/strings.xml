@@ -55,5 +55,9 @@
     <string name="activities">Activités</string>
     <string name="description_infos">Description</string>
     <string name="post_details">Détails du voyage</string>
+    <string name="error_enter_destination">Veuillez entrer une destination</string>
+    <string name="error_fill_flight_infos">Veuillez compléter correctement les informations de vol</string>
+    <string name="error_add_at_least_one_photo">Veuillez ajouter au moins une photo</string>
+    <string name="error_end_date_before_start">La date de fin ne peut pas être avant la date de début</string>
 
 </resources>
