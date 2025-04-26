@@ -66,15 +66,18 @@ class PostCreateActivity : AppCompatActivity() {
                             .load(uploadedUrl)
                             .into(imageView)
 
+                        imageView.setOnClickListener {
+                            binding.idPhotoGallery.removeView(imageView)
+                        }
+
                         binding.idPhotoGallery.addView(imageView)
                     } else {
-                        Toast.makeText(this@PostCreateActivity, "Erreur upload image", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@PostCreateActivity, getString(R.string.error_add_at_least_one_photo), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-    private var selectedStartDate: Long = 0L
-    private var selectedEndDate: Long = 0L
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -148,7 +151,7 @@ class PostCreateActivity : AppCompatActivity() {
             val companyInfos: CompanyInfos
 
             if (destination.isEmpty()) {
-                Toast.makeText(this, "Veuillez entrer une destination", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_enter_destination), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -156,7 +159,7 @@ class PostCreateActivity : AppCompatActivity() {
             if (isPlaneChecked) {
                 val priceValue = priceStr.toFloatOrNull()
                 if (selectedCompany.isEmpty() || priceStr.isEmpty() || link.isEmpty() || priceValue == null || priceValue <= 0f) {
-                    Toast.makeText(this, "Veuillez compléter correctement les informations de vol", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_fill_flight_infos), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
@@ -175,7 +178,7 @@ class PostCreateActivity : AppCompatActivity() {
 
             // Validation 3 : au moins une image uploadée
             if (binding.idPhotoGallery.childCount == 0) {
-                Toast.makeText(this, "Veuillez ajouter au moins une photo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_add_at_least_one_photo), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -250,7 +253,7 @@ class PostCreateActivity : AppCompatActivity() {
             val duration = ChronoUnit.DAYS.between(startDate, endDate).toInt()
 
             if (duration < 0) {
-                Toast.makeText(this, "La date de fin ne peut pas être avant la date de début", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_end_date_before_start), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
