@@ -257,13 +257,15 @@ class PostCreateActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val totalPrice = calculateTotal().toInt()
+
             val post = Post(
                 id = postId,
                 user_id = user.id,
                 name = destination,
                 post_date = LocalDate.now().toString(),
-                travel_infos = travelInfos,  // Utilise l'objet TravelInfos ici
-                total_price = price.toInt(),
+                travel_infos = travelInfos,
+                total_price = totalPrice,  // maintenant c'est vraiment correct !
                 presentation = Presentation(
                     image = pic[0].url,
                     total_time = duration,
@@ -385,6 +387,33 @@ class PostCreateActivity : AppCompatActivity() {
             binding.idSpinnerCompany.alpha = if (isChecked) 1f else 0.5f
         }
 
+    }
+
+    private fun calculateTotal(): Float {
+        var totalActivities = 0f
+        var totalAccommodations = 0f
+
+        for (i in 0 until binding.idPlacesList.childCount) {
+            val row = binding.idPlacesList.getChildAt(i) as? LinearLayout ?: continue
+            if (row.childCount < 2) continue
+
+            val priceEditText = row.getChildAt(1) as? EditText
+            val price = priceEditText?.text?.toString()?.toFloatOrNull() ?: 0f
+            totalActivities += price
+        }
+
+        for (i in 0 until binding.idAccommodationList.childCount) {
+            val row = binding.idAccommodationList.getChildAt(i) as? LinearLayout ?: continue
+            if (row.childCount < 2) continue
+
+            val priceEditText = row.getChildAt(1) as? EditText
+            val price = priceEditText?.text?.toString()?.toFloatOrNull() ?: 0f
+            totalAccommodations += price
+        }
+
+        val flightPrice = binding.idPrice.text.toString().toFloatOrNull() ?: 0f
+
+        return flightPrice + totalActivities + totalAccommodations
     }
 
     private fun updateTotal() {
