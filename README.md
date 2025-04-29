@@ -35,6 +35,6 @@ Suivez ces étapes simples pour lancer l'application en local :
 
 ---
 
-## 👨‍💻 Auteur
+## 👨‍💻 Auteurs
 
 Développé par [Tom MARSURA](https://github.com/TomMarsura) [Marwan LAHMAR](https://github.com/marwanlmr).
